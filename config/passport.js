@@ -14,5 +14,5 @@ module.exports=function () {
       console.log(accessToken);
       console.log(profile);
     })
-  )
+  );
 }
