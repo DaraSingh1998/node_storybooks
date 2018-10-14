@@ -1,0 +1,15 @@
+{
+  "name": "node_storybooks",
+  "version": "1.0.0",
+  "description": "App to share or write stories",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Dara Singh",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.3.3"
+  }
+}
