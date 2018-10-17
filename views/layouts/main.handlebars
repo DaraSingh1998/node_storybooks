@@ -26,9 +26,15 @@
   crossorigin="anonymous">
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script src="https://cdn.ckeditor.com/4.10.1/standard/ckeditor.js"></script>
   <script>
     $(document).ready(()=>{
       $('.button-collapse').sideNav();
+      $('select').material_select();
+    });
+
+    CKEDITOR.replace('body',{
+      plugins: 'wysiwygarea,toolbar,basicstyles,link'
     });
   </script>
 </body>
