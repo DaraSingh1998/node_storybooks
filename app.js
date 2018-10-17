@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 const exphbs=require('express-handlebars');
 const cookieParser=require('cookie-parser');
 const session=require('express-session');
@@ -18,6 +19,7 @@ const keys=require('./config/keys');
 // Routes
 const auth=require('./routes/auth');
 const index=require('./routes/index');
+const stories=require('./routes/stories');
 
 // Map Global Promisses
 mongoose.Promise=global.Promise;
@@ -57,9 +59,13 @@ app.use((req,res,next)=>{
   next();
 });
 
+// Set Static folder
+app.use(express.static(path.join(__dirname,'public')));
+
 // Use Routes
 app.use('/auth',auth);
 app.use('/',index);
+app.use('/stories',stories);
 
 app.listen(PORT,()=>{
   console.log(`Server started on port ${PORT}`);
