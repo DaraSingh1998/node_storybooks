@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema=mongoose.Schema;
 
 // Create Schema
-const StorScheyma=new Schema({
+const StorySchema=new Schema({
   title:{
     type:String,
     required:true
@@ -36,12 +36,14 @@ const StorScheyma=new Schema({
   user:{
     type:Schema.Types.ObjectId,
     ref:'users'
-  }
+  },
   date:{
     type:Date,
     default:Date.now()
   }
 });
+// Create collection and add schema
+// mongoose.model('stories', StorySchema, 'stories');
 const Story=mongoose.model('stories',StorySchema,'stories');
 
 module.exports={

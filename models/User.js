@@ -21,6 +21,9 @@ const UsersSchema=new Schema({
     type:String
   }
 });
+
+// Create collection and add schema
+// mongoose.model('users', UsersSchema);
 const User=mongoose.model('User',UsersSchema);
 
 module.exports={

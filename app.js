@@ -1,11 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const bodyParser = require('body-parser');
 const exphbs=require('express-handlebars');
 const cookieParser=require('cookie-parser');
 const session=require('express-session');
 const passport = require('passport');
 const {User}=require('./models/User');
+const {Story}=require('./models/Story');
+// require('./models/User');
+// require('./models/Story');
 
 const app=express();
 
@@ -16,14 +20,6 @@ require('./config/passport')(passport);
 // Kyes config
 const keys=require('./config/keys');
 
-// Routes
-const auth=require('./routes/auth');
-const index=require('./routes/index');
-const stories=require('./routes/stories');
-
-// Map Global Promisses
-mongoose.Promise=global.Promise;
-
 // mongoose Connect
 mongoose.connect(keys.mongoURI,{ useNewUrlParser: true })
   .then(()=>{
@@ -32,6 +28,14 @@ mongoose.connect(keys.mongoURI,{ useNewUrlParser: true })
   .catch(err=>{
     console.log(err);
   });
+
+// Routes
+const auth=require('./routes/auth');
+const index=require('./routes/index');
+const stories=require('./routes/stories');
+
+// Map Global Promisses
+mongoose.Promise=global.Promise;
 
 // MiddleWares
 
@@ -52,6 +56,10 @@ app.use(session({
 // Passport MiddleWare
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Boby-Parser MiddleWare
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Set Global Variables
 app.use((req,res,next)=>{
