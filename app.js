@@ -20,6 +20,9 @@ require('./config/passport')(passport);
 // Kyes config
 const keys=require('./config/keys');
 
+// Helpers
+const{truncate,stripTags}=require('./helpers/hbs');
+
 // mongoose Connect
 mongoose.connect(keys.mongoURI,{ useNewUrlParser: true })
   .then(()=>{
@@ -40,7 +43,11 @@ mongoose.Promise=global.Promise;
 // MiddleWares
 
 // Express Handlebars
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.engine('handlebars', exphbs({
+  helpers:{
+    truncate:truncate,
+    stripTags:stripTags
+  },defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 // Cookir Parser
