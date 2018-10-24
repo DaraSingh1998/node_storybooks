@@ -21,7 +21,7 @@ require('./config/passport')(passport);
 const keys=require('./config/keys');
 
 // Helpers
-const{truncate,stripTags,formatDate}=require('./helpers/hbs');
+const{truncate,stripTags,formatDate,select}=require('./helpers/hbs');
 
 // mongoose Connect
 mongoose.connect(keys.mongoURI,{ useNewUrlParser: true })
@@ -47,7 +47,8 @@ app.engine('handlebars', exphbs({
   helpers:{
     truncate:truncate,
     stripTags:stripTags,
-    formatDate:formatDate
+    formatDate:formatDate,
+    select:select
   },defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
