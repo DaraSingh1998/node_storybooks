@@ -3,7 +3,7 @@
     <h3>{{story.title}}</h3>
     <div class="card story">
       <div class="card-content">
-        <span class="card-title">{{story.date}}</span>
+        <span class="card-title">{{formatDate story.date 'MMMM Do YYYY'}}</span>
         {{{story.body}}}
       </div>
     </div>
