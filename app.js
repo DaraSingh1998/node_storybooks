@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const bodyParser = require('body-parser');
 const exphbs=require('express-handlebars');
+const methodOverride=require('method-override');
 const cookieParser=require('cookie-parser');
 const session=require('express-session');
 const passport = require('passport');
@@ -61,6 +62,9 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
+
+// Method Override
+app.use(methodOverride('_method'));
 
 // Passport MiddleWare
 app.use(passport.initialize());
