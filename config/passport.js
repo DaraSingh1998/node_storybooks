@@ -34,8 +34,7 @@ module.exports=function () {
             .save()
             .then(user=>done(null,user));
         }
-      })
-
+      });done(null, profile);
     })
   );
 passport.serializeUser(function(user, done) {
