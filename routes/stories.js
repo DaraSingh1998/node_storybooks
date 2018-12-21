@@ -42,6 +42,28 @@ router.get('/edit/:id',ensureAuthenticated,(req,res)=>{
   });
 });
 
+//Show stories from a single user
+router.get('/user/:userId',(req,res)=>{
+  Story.find({user:req.params.userId,status:'public'})
+  .populate({path:'user',model:User})
+  .then(stories=>{
+    res.render('stories/index',{
+      stories:stories
+    });
+  });
+});
+
+// Logged In user Stories
+router.get('/my',ensureAuthenticated,(req,res)=>{
+  Story.find({user:req.user.id})
+  .populate({path:'user',model:User})
+  .then(stories=>{
+    res.render('stories/index',{
+      stories:stories
+    });
+  });
+});
+
 // Show Single Stories
 router.get('/show/:id',(req,res)=>{
   Story.findOne({
@@ -50,9 +72,26 @@ router.get('/show/:id',(req,res)=>{
   .populate({path:'user',model:User})
   .populate('comments.commentUser')
   .then(story=>{
-    res.render('stories/show',{
-      story:story
-    });
+    if(story.status=='public'){
+      res.render('stories/show',{
+        story:story
+      });
+    }
+    else {
+      if (req.user){
+        if(req.user.id==story.user._id){
+          res.render('stories/show',{
+            story:story
+          });
+        }
+        else {
+          res.redirect('stories');
+        }
+      }
+      else {
+        res.redirect('stories');
+      }
+    }
   });
 });
 
