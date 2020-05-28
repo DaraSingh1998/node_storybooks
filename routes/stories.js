@@ -168,6 +168,8 @@ router.post('/comment/:id',(req,res)=>{
       story.save()
         .then(story=>{
           res.redirect(`/stories/show/${story.id}`);
+        }).catch(error => {
+            console.log(error);
         })
     });
 });
